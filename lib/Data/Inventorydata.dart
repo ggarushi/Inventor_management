@@ -71,26 +71,37 @@ class Itemlist extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         elevation:5.0,
         color:Colors.white70,
-        child:Padding(
-          padding:EdgeInsets.symmetric(vertical :10.0,horizontal: 10.0),
-        child:Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-             child:Text(
-               i_name
-             ),
-            ),
-            Container(
-              child:Text(
-                  '${i_quantity.toString()} kg'
+        child: Card(
+          child: Padding(
+            padding:EdgeInsets.symmetric(vertical :10.0,horizontal: 10.0),
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+               child:Text(
+                 'itemname : ${i_name}',
+                   style:TextStyle(
+                     fontSize: 15,
+                   )
+               ),
               ),
-            ),
-            Container(
-              child:Text(
-                  '${i_cost.toString()} Rs',
+              Container(
+                child:Text(
+                    'Quantity :  ${i_quantity.toString()} kg',
+                    style:TextStyle(
+                      fontSize: 15,
+                    )
+                ),
               ),
-            ),
+              Container(
+                child:Text(
+                    'Cost Price : ${i_cost.toString()} Rs',
+                    style:TextStyle(
+                      fontSize: 15,
+                    )
+                ),
+              ),
 //            Container(
 //              child:Text(
 //                  dname,
@@ -99,8 +110,9 @@ class Itemlist extends StatelessWidget {
 ////                ),
 //              ),
 //            ),
-          ],
-        )
+            ],
+          )
+          ),
         )
 
       )
