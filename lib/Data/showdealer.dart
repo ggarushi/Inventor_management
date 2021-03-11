@@ -67,28 +67,40 @@ class Dealerlist extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             elevation:5.0,
             color:Colors.white70,
-            child:Padding(
-                padding:EdgeInsets.symmetric(vertical :10.0,horizontal: 10.0),
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      child:Text(
-                          d_name
+            child:Card(
+              child: Padding(
+                  padding:EdgeInsets.symmetric(vertical :10.0,horizontal: 10.0),
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child:Text(
+                            'Dealer Name : ${d_name}',
+                          style:TextStyle(
+                            fontSize: 15,
+                          )
+                        ),
                       ),
-                    ),
-                    Container(
-                      child:Text(
-                          d_phone
+                      Container(
+                        child:Text(
+                            'Phone Number :  ${d_phone}',
+                            style:TextStyle(
+                              fontSize: 15,
+                            )
+                        ),
                       ),
-                    ),
-                    Container(
-                      child:Text(
-                        d_add
+                      Container(
+                        child:Text(
+                          'Dealer Address : ${d_add}',
+                            style:TextStyle(
+                              fontSize: 15,
+                            )
+                        ),
                       ),
-                    ),
-                  ],
-                )
+                    ],
+                  )
+              ),
             )
 
         )
