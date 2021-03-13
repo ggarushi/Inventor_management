@@ -95,7 +95,7 @@ class _DealerinfoState extends State<Dealerinfo> {
                               _formKey.currentState.save();
                               final  userid =  _auth.currentUser.uid;
                               //storing on firestore
-                              await db.collection("userData").doc(userid).collection("item").add({
+                              await db.collection("userData").doc(userid).collection("dealerinfo").add({
                                 "dealeraddress":_dealeraddress,
                                 "dealername":_dealername,
                                 "dealerphone":_dealerphone,
