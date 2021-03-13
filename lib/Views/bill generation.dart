@@ -33,7 +33,7 @@ class _BillState extends State<Bill> {
       },
     );
   }
-  Widget _buildquantity(){
+  Widget _buildquantity(double maxquantity){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Item Quantity(in Kg)',),
       keyboardType: TextInputType.number,
@@ -41,7 +41,8 @@ class _BillState extends State<Bill> {
         if (value.isEmpty) {
           return 'quantity is Required';
         }
-
+        if(double.parse(value)>maxquantity)
+          return 'entered amount is more than available in inventory';
         return null;
       },
       onSaved: (String value) {
@@ -88,51 +89,58 @@ class _BillState extends State<Bill> {
                                 Form(
                                     key: _formKey,
                                     child:
-                                    Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          _buildquantity(),
-                                          SizedBox(height: 8.0),
-                                          _buildcost(),
-                                          SizedBox(height: 8.0),
-                                          _buildName(),
-                                          SizedBox(height: 8.0),
+                                    Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            _buildquantity(data['itemquantity']),
+                                            SizedBox(height: 20.0),
+                                            _buildcost(),
+                                            SizedBox(height: 15.0),
+                                            Text("Minimum cost of this product must be ${(data['itemcost']/data['itemquantity']).round()}"
+
+                                            ),
+                                            SizedBox(height: 50.0),
+
 //                        Text(
 //                          message,
 //                          style: TextStyle(color: Colors.blue, fontSize: 13),
 //                        ),
-                                          RaisedButton(
-                                            child: Text(
-                                              'Submit',
-                                              style: TextStyle(color: Colors.blue, fontSize: 16),
-                                            ),
-                                            onPressed: ()async{
-                                              if (!_formKey.currentState.validate()) {
-                                                return;
-                                              }
+                                            RaisedButton(
+                                              child: Text(
+                                                'Submit',
+                                                style: TextStyle(color: Colors.blue, fontSize: 16),
+                                              ),
+                                              onPressed: ()async{
+                                                if (!_formKey.currentState.validate()) {
+                                                  return;
+                                                }
 //                Store the values in database
-                                              else{
-                                                _formKey.currentState.save();
+                                                else{
+                                                  _formKey.currentState.save();
 
 
-                                                //storing on firestore
-                                                await db.collection("userData").doc(userid).collection("salesInfo").add({
-                                                  "itemname":_itemname,
-                                                  "itemquantity":_quantity,
-                                                  "itemcost":_cost,
+                                                  //storing on firestore
+                                                  await db.collection("userData").doc(userid).collection("salesInfo").add({
+                                                    "itemname":_itemname,
+                                                    "itemquantity":_quantity,
+                                                    "itemcost":_cost,
 
 
-                                                });
-                                                Navigator.pop(context);
+                                                  });
+                                                  Navigator.pop(context);
 
 //                      setState((){
 //                        message="fields must be field correctly";
 //                      })
-                                              }
-                                            },
-                                          )
+                                                }
+                                              },
+                                            )
 
-                                        ])
+                                          ]),
+                                    )
                                 )
                               ],
                             )
