@@ -78,13 +78,14 @@ class _BillState extends State<Bill> {
                         data['itemname'],
                       ),
                       subtitle:Text(
-                       "${data['itemcost'].toString()} Kg   ${data['itemquantity'].toString()} Rs. "
+                       "${data['itemcost'].toString()} Rs.   ${data['itemquantity'].toString()} Kg "
                       ),
                        //calls bottomsheet to add items in bill
                        onLongPress: (){
 //                         showModalBottomSheet(isScrollControlled: true,context: context, builder:(context)=>Billadd());
                           showDialog(context: context,builder:(context)=>Dialog(
                             child:ListView(
+                              shrinkWrap: true,
                               children: <Widget>[
                                 Form(
                                     key: _formKey,
@@ -124,11 +125,14 @@ class _BillState extends State<Bill> {
 
                                                   //storing on firestore
                                                   await db.collection("userData").doc(userid).collection("salesInfo").add({
-                                                    "itemname":_itemname,
+                                                    "itemname":data['itemname'],
                                                     "itemquantity":_quantity,
                                                     "itemcost":_cost,
 
 
+                                                  });
+                                                  data.reference.update({
+                                                    "itemquantity":data['itemquantity']-_quantity
                                                   });
                                                   Navigator.pop(context);
 
