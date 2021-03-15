@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Data/Billitems.dart';
 
-class Bill extends StatefulWidget {
+class Useold extends StatefulWidget {
 
   @override
-  _BillState createState() => _BillState();
+  _UseoldState createState() => _UseoldState();
 }
 
-class _BillState extends State<Bill> {
+class _UseoldState extends State<Useold> {
 
   final userid=FirebaseAuth.instance.currentUser.uid;
   final db=FirebaseFirestore.instance;
@@ -33,7 +33,7 @@ class _BillState extends State<Bill> {
       },
     );
   }
-  Widget _buildquantity(double maxquantity){
+  Widget _buildquantity(){
     return TextFormField(
       decoration: InputDecoration(labelText: 'Item Quantity(in Kg)',),
       keyboardType: TextInputType.number,
@@ -41,8 +41,6 @@ class _BillState extends State<Bill> {
         if (value.isEmpty) {
           return 'quantity is Required';
         }
-        if(double.parse(value)>maxquantity)
-          return 'entered amount is more than available in inventory';
         return null;
       },
       onSaved: (String value) {
@@ -96,14 +94,10 @@ class _BillState extends State<Bill> {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
-                                                  _buildquantity(data['itemquantity']),
+                                                  _buildquantity(),
                                                   SizedBox(height: 20.0),
                                                   _buildcost(),
                                                   SizedBox(height: 15.0),
-                                                  Text("Minimum cost of this product must be ${(data['itemcost']/data['itemquantity']).round()}"
-
-                                                  ),
-                                                  SizedBox(height: 50.0),
 
 //                        Text(
 //                          message,
@@ -123,16 +117,10 @@ class _BillState extends State<Bill> {
                                                         _formKey.currentState.save();
 
 
-                                                        //storing on firestore
-                                                        await db.collection("userData").doc(userid).collection("salesInfo").add({
-                                                          "itemname":data['itemname'],
-                                                          "itemquantity":_quantity,
-                                                          "itemcost":_cost,
-
-
-                                                        });
+                                                        //updating on firestore
                                                         data.reference.update({
-                                                          "itemquantity":data['itemquantity']+_quantity
+                                                          "itemquantity":data['itemquantity']+_quantity,
+                                                          "itemcost":data['itemcost']+_cost
                                                         });
                                                         Navigator.pop(context);
 
