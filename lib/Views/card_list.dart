@@ -8,13 +8,14 @@ import 'dealerinfo.dart';
 import 'bill generation.dart';
 import'package:firebase_auth/firebase_auth.dart';
 import '../SIgninfiles/Homepage.dart';
+import 'UpdateOld.dart';
 //screen to show card
 class Listitem extends StatelessWidget {
 //  Carddata task;
 //  final List<Carddata>_Cardd=[Carddata(cardname:'Add New Item',ico:'plus'),Carddata(cardname:'Delete Item',ico:'trash'),Carddata(cardname:'Check Inventory',ico:'shopping-basket'),
 //    Carddata(cardname:'Dealer Details',ico:'users'),
 //    Carddata(cardname:'Add  New Dealer',ico:'user-check'),Carddata(cardname:'Purchase Details',ico:'shopping-cart')];
-  final List<String>_Cardd=['Add New Item','Check Inventory','Dealer Details','Add  New Dealer','Selling Details','Generate Bill'];
+  final List<String>_Cardd=['Add New Item','Add in Old item','Check Inventory','Dealer Details','Add  New Dealer','Selling Details','Generate Bill'];
   final _auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -58,13 +59,31 @@ class Listitem extends StatelessWidget {
                 ),
               ),
               //delete item
+                  Card(
+                    //add in existing item
+                    margin: EdgeInsets.symmetric(vertical: 12),
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(FontAwesomeIcons.plus),
+                      title: Text(_Cardd[1]),
+                      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
+                      25.0),
+                      //onpress leads to add sheat
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Useold()),
+                        );
+                      },
+                    ),
+                  ),
               //check inventory
               Card(
                 margin: EdgeInsets.symmetric(vertical: 12),
                 color: Colors.grey[200],
                 child: ListTile(
                 leading: Icon(FontAwesomeIcons.shoppingBasket),
-                title: Text(_Cardd[1]),
+                title: Text(_Cardd[2]),
                   contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
                   25.0),
                   onTap: (){
@@ -81,7 +100,7 @@ class Listitem extends StatelessWidget {
                     color: Colors.grey[200],
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.users),
-                      title: Text(_Cardd[2]),
+                      title: Text(_Cardd[3]),
                       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
                       25.0),
                       onTap: (){
@@ -98,7 +117,7 @@ class Listitem extends StatelessWidget {
                     color: Colors.grey[200],
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.userCheck),
-                      title: Text(_Cardd[3]),
+                      title: Text(_Cardd[4]),
                       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
                       25.0),
                       onTap: (){
@@ -114,7 +133,7 @@ class Listitem extends StatelessWidget {
                     color: Colors.grey[200],
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.shoppingCart),
-                      title: Text(_Cardd[4]),
+                      title: Text(_Cardd[5]),
                       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
                       25.0),
                       onTap:(){
@@ -131,7 +150,7 @@ class Listitem extends StatelessWidget {
                     color: Colors.grey[200],
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.stickyNote),
-                      title: Text(_Cardd[5]),
+                      title: Text(_Cardd[6]),
                       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal:
                       25.0),
                       onTap:(){
