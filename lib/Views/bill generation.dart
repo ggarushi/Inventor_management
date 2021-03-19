@@ -25,7 +25,8 @@ class _BillState extends State<Bill> {
         if (value.isEmpty) {
           return 'cost price of the item is Required';
         }
-
+        if(double.parse(value)<=0)
+          return 'entered value is not allowed';
         return null;
       },
       onSaved: (String value) {
@@ -43,8 +44,11 @@ class _BillState extends State<Bill> {
         }
         if(double.parse(value)>maxquantity)
           return 'entered amount is more than available in inventory';
+        if(double.parse(value)<=0)
+          return 'entered value is not allowed';
         return null;
       },
+
       onSaved: (String value) {
         _quantity = double.parse(value);
       },
