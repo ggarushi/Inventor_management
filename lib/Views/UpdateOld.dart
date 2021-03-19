@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../Data/Billitems.dart';
 
 class Useold extends StatefulWidget {
 
@@ -25,7 +24,8 @@ class _UseoldState extends State<Useold> {
         if (value.isEmpty) {
           return 'cost price of the item is Required';
         }
-
+        if(double.parse(value)<=0)
+          return 'entered value is not allowed';
         return null;
       },
       onSaved: (String value) {
@@ -41,6 +41,8 @@ class _UseoldState extends State<Useold> {
         if (value.isEmpty) {
           return 'quantity is Required';
         }
+        if(double.parse(value)<=0)
+          return 'entered value is not allowed';
         return null;
       },
       onSaved: (String value) {
