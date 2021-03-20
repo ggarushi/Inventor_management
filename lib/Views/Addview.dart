@@ -43,7 +43,8 @@ class _BottomaddState extends State<Bottomadd> {
           if (value.isEmpty) {
             return 'quantity is Required';
           }
-
+          if(double.parse(value)<=0)
+            return 'entered value is not allowed';
           return null;
         },
         onSaved: (String value) {
@@ -60,7 +61,8 @@ class _BottomaddState extends State<Bottomadd> {
         if (value.isEmpty) {
           return 'cost price of the item is Required';
         }
-
+        if(double.parse(value)<=0)
+          return 'entered value is not allowed';
         return null;
       },
       onSaved: (String value) {
